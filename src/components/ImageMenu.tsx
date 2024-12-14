@@ -5,6 +5,7 @@ import { AddToAlbumDialog } from './AddToAlbumDialog'
 import { useState } from 'react'
 import { Pencil } from 'lucide-react'
 import { Button } from '~/components/ui/button'
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,8 +31,9 @@ export function ImageMenu({ image }: { image: SearchResult }) {
           <DropdownMenuItem asChild>
             <Link
               href={`/edit?publicId=${encodeURIComponent(image.public_id)}`}
+              className='pl-4 flex gap-4'
             >
-              <Pencil className='mr-2 w-4 h-4' />
+              <Pencil className='w-4 h-4' />
               Edit
             </Link>
           </DropdownMenuItem>

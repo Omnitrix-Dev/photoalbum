@@ -2,14 +2,15 @@ import './globals.css'
 import Image from 'next/image'
 import cloudinary from 'cloudinary'
 
+import type { Metadata } from 'next'
 import { Link } from 'next-view-transitions'
 import { ViewTransitions } from 'next-view-transitions'
-import type { Metadata } from 'next'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Button } from '~/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
 import { Heart } from 'lucide-react'
+import { Folder } from './albums/page'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -32,7 +33,7 @@ async function SideMenu() {
   }
 
   return (
-    <div className='pb-12 w-1/5 sticky top-0 h-screen'>
+    <div className='pb-12 hidden sm:block w-1/5 sticky top-0 h-screen'>
       <div className='space-y-4 py-4'>
         <div className='px-3 py-2'>
           <h2 className='mb-2 px-4 text-lg font-semibold tracking-tight'>
@@ -93,7 +94,7 @@ async function SideMenu() {
                 className='w-full justify-start flex gap-2'
               >
                 <Link className='pl-8' href={`/albums/${folder.path}`}>
-                  {folder.name}
+                  • {folder.name}
                 </Link>
               </Button>
             ))}
@@ -134,24 +135,20 @@ export default function RootLayout({
                 alt='icon of this photo album app'
               />
               <h1 className='font-semibold text-2xl ml-1'>PhotoAlbums</h1>
-              <div className='ml-auto flex items-center space-x-4'>
-                <Avatar>
-                  <AvatarImage
-                    src='https://github.com/shadcn.png'
-                    alt='@shadcn'
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              </div>
             </div>
           </div>
 
-          <div className='flex'>
+          <div className='hidden sm:flex'>
             <SideMenu />
 
             <div className='w-full px-4 pt-8'>
               <NuqsAdapter>{children}</NuqsAdapter>
             </div>
+          </div>
+          <div className='flex items-center sm:hidden'>
+            <h1 className='font-bold text-3xl mt-[200px] text-center'>
+              Unfortunately we don't support mobile devices yet
+            </h1>
           </div>
         </body>
       </html>

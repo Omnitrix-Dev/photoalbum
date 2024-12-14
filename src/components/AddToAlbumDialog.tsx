@@ -36,11 +36,9 @@ export function AddToAlbumDialog({
         }
       }}
     >
-      <DialogTrigger>
-        <Button variant='ghost'>
-          <FolderPlus className='mr-2 h-4 w-4' />
-          <span>Add to Album</span>
-        </Button>
+      <DialogTrigger className='flex items-center pl-4 gap-4'>
+        <FolderPlus className='h-4 w-4' />
+        <span>Add to Album</span>
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>

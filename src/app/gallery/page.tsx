@@ -12,6 +12,7 @@ export type SearchResult = {
 }
 
 async function GalleryWithData({ searchTerm }: { searchTerm: string }) {
+  console.log('searchTerm', searchTerm)
   const results = (await cloudinary.v2.search
     .expression(
       `resource_type:image${searchTerm ? ` AND tags=${searchTerm}` : ''}`,
@@ -32,6 +33,7 @@ export default async function GalleryPage({
   }>
 }) {
   const search = (await searchParams).search
+  console.log('search', search)
   return (
     <section>
       <div className='flex flex-col gap-8'>

@@ -19,15 +19,14 @@ export function SearchForm({ initialSearch }: { initialSearch: string }) {
 
   return (
     <form
+      className='flex flex-col gap-3'
       onSubmit={e => {
         e.preventDefault()
         router.replace(`/gallery?search=${encodeURIComponent(search)}`)
         router.refresh()
       }}
     >
-      <Label htmlFor='tag-name' className='text-right'>
-        Search By Tag
-      </Label>
+      <Label htmlFor='tag-name'>Search By Tag</Label>
       <div className='flex gap-2'>
         <Input
           onChange={e => setSearch(e.target.value)}
