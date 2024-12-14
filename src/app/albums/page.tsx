@@ -1,25 +1,38 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '~/components/ui/dialog'
+import cloudinary from 'cloudinary'
 
-export default function AlbumsPage() {
+import { Suspense } from 'react'
+import { AlbumCard } from './_components/AlbumCard'
+import { AlbumSkeleton } from '~/components/skeletons/AlbumSkeleton'
+
+export type Folder = { name: string; path: string }
+
+async function AlbumWithData() {
+  const { folders } = (await cloudinary.v2.api.root_folders()) as {
+    folders: Folder[]
+  }
+  return folders.map(folder => <AlbumCard key={folder.path} folder={folder} />)
+}
+
+export default async function AlbumsPage() {
   return (
-    <Dialog>
-      <DialogTrigger>Open</DialogTrigger>
-      <DialogContent className='backdrop-blur-lg'>
-        <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
+    <section>
+      <div className='flex flex-col gap-8'>
+        <div className='flex justify-between'>
+          <h1 className='text-4xl font-bold'>Albums</h1>
+        </div>
+
+        <div className='grid grid-cols-3 gap-4'>
+          <Suspense
+            fallback={
+              <section className='flex flex-wrap flex-col sm:flex-row gap-2 border'>
+                <AlbumSkeleton />
+              </section>
+            }
+          >
+            <AlbumWithData />
+          </Suspense>
+        </div>
+      </div>
+    </section>
   )
 }

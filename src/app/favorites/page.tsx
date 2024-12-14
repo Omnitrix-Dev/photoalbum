@@ -4,6 +4,7 @@ import { SearchResult } from '../gallery/page'
 import { ForceRefresh } from '~/components/ForceRefresh'
 import { FavoritesList } from './_components/FavoriteLists'
 import { Suspense } from 'react'
+import { GallerySkeleton } from '~/components/skeletons/GallerySkeleton'
 
 async function FavoritesWithData() {
   const results = (await cloudinary.v2.search
@@ -25,7 +26,7 @@ export default async function FavoritesPage() {
         <div className='flex justify-between'>
           <h1 className='text-4xl font-bold'>Favorite Images</h1>
         </div>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<GallerySkeleton />}>
           <FavoritesWithData />
         </Suspense>
       </div>

@@ -4,6 +4,7 @@ import { UploadButton } from './_components/UploadButton'
 import { SearchForm } from './_components/SearchForm'
 import { GalleryGrid } from './_components/GalleryGrid'
 import { Suspense } from 'react'
+import { GallerySkeleton } from '~/components/skeletons/GallerySkeleton'
 
 export type SearchResult = {
   public_id: string
@@ -39,7 +40,7 @@ export default async function GalleryPage({
           <UploadButton />
         </div>
         <SearchForm initialSearch={search} />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<GallerySkeleton />}>
           <GalleryWithData searchTerm={search} />
         </Suspense>
       </div>

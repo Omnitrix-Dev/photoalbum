@@ -27,9 +27,9 @@ export const metadata: Metadata = {
 }
 
 async function SideMenu() {
-  // const { folders } = (await cloudinary.v2.api.root_folders()) as {
-  //   folders: Folder[]
-  // }
+  const { folders } = (await cloudinary.v2.api.root_folders()) as {
+    folders: Folder[]
+  }
 
   return (
     <div className='pb-12 w-1/5 sticky top-0 h-screen'>
@@ -85,7 +85,7 @@ async function SideMenu() {
                 Albums
               </Link>
             </Button>
-            {/* {folders.map(folder => (
+            {folders.map(folder => (
               <Button
                 variant='ghost'
                 asChild
@@ -96,7 +96,7 @@ async function SideMenu() {
                   {folder.name}
                 </Link>
               </Button>
-            ))} */}
+            ))}
             <Button
               asChild
               variant='ghost'
@@ -133,7 +133,7 @@ export default function RootLayout({
                 height='50'
                 alt='icon of this photo album app'
               />
-              PhotoAlbums
+              <h1 className='font-semibold text-2xl ml-1'>PhotoAlbums</h1>
               <div className='ml-auto flex items-center space-x-4'>
                 <Avatar>
                   <AvatarImage
