@@ -4,6 +4,7 @@ import Link from 'next/link'
 import cloudinary from 'cloudinary'
 
 import type { Metadata } from 'next'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Button } from '~/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
@@ -146,7 +147,9 @@ export default function RootLayout({
         <div className='flex'>
           <SideMenu />
 
-          <div className='w-full px-4 pt-8'>{children}</div>
+          <div className='w-full px-4 pt-8'>
+            <NuqsAdapter>{children}</NuqsAdapter>
+          </div>
         </div>
       </body>
     </html>
