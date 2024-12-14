@@ -1,8 +1,9 @@
 import './globals.css'
 import Image from 'next/image'
-import Link from 'next/link'
 import cloudinary from 'cloudinary'
 
+import { Link } from 'next-view-transitions'
+import { ViewTransitions } from 'next-view-transitions'
 import type { Metadata } from 'next'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Geist, Geist_Mono } from 'next/font/google'
@@ -31,7 +32,7 @@ async function SideMenu() {
   // }
 
   return (
-    <div className='pb-12 w-1/5'>
+    <div className='pb-12 w-1/5 sticky top-0 h-screen'>
       <div className='space-y-4 py-4'>
         <div className='px-3 py-2'>
           <h2 className='mb-2 px-4 text-lg font-semibold tracking-tight'>
@@ -43,7 +44,7 @@ async function SideMenu() {
               variant='ghost'
               className='w-full justify-start flex gap-2'
             >
-              <Link href='/gallery'>
+              <Link prefetch={true} href='/gallery'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -119,39 +120,41 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' className='dark'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className='border-b'>
-          <div className='flex h-16 items-center px-4 container mx-auto'>
-            <Image
-              src='/album.png'
-              width='50'
-              height='50'
-              alt='icon of this photo album app'
-            />
-            PhotoAlbums
-            <div className='ml-auto flex items-center space-x-4'>
-              <Avatar>
-                <AvatarImage
-                  src='https://github.com/shadcn.png'
-                  alt='@shadcn'
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+    <ViewTransitions>
+      <html lang='en' className='dark'>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <div className='border-b'>
+            <div className='flex h-16 items-center px-4 container mx-auto'>
+              <Image
+                src='/album.png'
+                width='50'
+                height='50'
+                alt='icon of this photo album app'
+              />
+              PhotoAlbums
+              <div className='ml-auto flex items-center space-x-4'>
+                <Avatar>
+                  <AvatarImage
+                    src='https://github.com/shadcn.png'
+                    alt='@shadcn'
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className='flex'>
-          <SideMenu />
+          <div className='flex'>
+            <SideMenu />
 
-          <div className='w-full px-4 pt-8'>
-            <NuqsAdapter>{children}</NuqsAdapter>
+            <div className='w-full px-4 pt-8'>
+              <NuqsAdapter>{children}</NuqsAdapter>
+            </div>
           </div>
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }

@@ -12,7 +12,7 @@ export function GalleryGrid({ images }: { images: SearchResult[] }) {
         return (
           <CloudinaryImage
             key={imageData.public_id}
-            imageData={imageData}
+            imagedatas={imageData}
             width='400'
             height='300'
             alt='an image of something'

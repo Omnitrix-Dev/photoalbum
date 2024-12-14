@@ -1,5 +1,4 @@
-import Link from 'next/link'
-
+import { Link } from 'next-view-transitions'
 import { SearchResult } from '~/app/gallery/page'
 import { Menu } from './icons'
 import { AddToAlbumDialog } from './AddToAlbumDialog'
@@ -20,7 +19,7 @@ export function ImageMenu({ image }: { image: SearchResult }) {
     <div className='absolute top-2 right-2'>
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <Button variant='secondary' className='w-8 h-8 p-0 hidden'>
+          <Button variant='secondary' className='w-8 h-8 p-0'>
             <Menu />
           </Button>
         </DropdownMenuTrigger>
